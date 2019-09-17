@@ -1,31 +1,18 @@
-# CUBA Petclinic
+# CUBA Petclinic: Maps
 
 <p align="center">
   <img src="https://github.com/cuba-platform/cuba-petclinic/blob/master/modules/web/themes/hover/branding/petclinic_logo_full.png"/>
 </p>
 
-
-CUBA Petclinic is a CUBA platform example application dealing with the domain of a petclinic. It is based on the commonly known [Spring Petclinic](https://github.com/spring-projects/spring-petclinic) example.
-
-The CUBA Petclinic application deals with the domain of a Pet clinic and the associated business workflows to manage a pet clinic.
-
-## Online Demo
-
-You can find the CUBA Petclinic as an online hosted example here: [CUBA Petclinic Online Demo](https://demo4.cuba-platform.com/petclinic)
-
-
-## Application overview
-
-<a href="https://raw.githubusercontent.com/cuba-platform/cuba-petclinic/master/img/cuba-petclinic-overview.gif"><img src="https://raw.githubusercontent.com/cuba-platform/cuba-petclinic/master/img/login-screen.png"/></a>
-
+This is a variation of [CUBA Petclinic](https://github.com/cuba-platform/cuba-petclinic) application working with the [CUBA Maps add-on](https://www.cuba-platform.com/marketplace/maps/).
 
 ## Domain model
 
 
-![CUBA Petclinic Domain model](https://github.com/cuba-platform/cuba-petclinic/blob/master/img/domain-model.png)
+![CUBA Petclinic Domain model](https://github.com/glebshalyganov/cuba-petclinic-maps/blob/master/img/domain-model-extended.png)
 
 
-## starting the application
+## Starting the application
 
 #### start database
 ```
@@ -36,5 +23,20 @@ You can find the CUBA Petclinic as an online hosted example here: [CUBA Petclini
 ```
 ./restart-server.sh
 ```
+
+## Populating the application with the data
+
+To see the nice view on maps in the application, you need to import the predefined data to it.
+
+ * Find `import1.groovy` and `import2.groovy` scripts in the `/data` folder.
+
+ * Put them into `conf/petclinic-core` folder on your application server.
+ 
+ * In the application go to `Administration -> JMX Console`. Find `ScriptingManager` JMX bean.
+ 
+ * Run `import1.groovy` script and then `import2.groovy` script.
+
+
+
 
 
