@@ -6,15 +6,20 @@
     <data>
         <instance id="visitDc"
                   class="com.haulmont.sample.petclinic.entity.visit.Visit"
-                  view="visit-with-pet">
+                  view="visit-with-pet-and-clinic">
             <loader/>
         </instance>
 
-        <collection id="petsDc" class="com.haulmont.sample.petclinic.entity.pet.Pet" view="_base">
+        <collection id="petsDc" class="com.haulmont.sample.petclinic.entity.pet.Pet" view="pet-with-owner-and-type">
             <loader>
                 <query>
                     select e from petclinic_Pet e
                 </query>
+            </loader>
+        </collection>
+        <collection id="clinicsDc" class="com.haulmont.sample.petclinic.entity.clinic.Clinic" view="_local">
+            <loader>
+                <query><![CDATA[select e from petclinic_Clinic e ]]></query>
             </loader>
         </collection>
     </data>
@@ -28,6 +33,7 @@
                 <dateField property="visitDate"/>
                 <textArea rows="5" property="description"/>
                 <lookupPickerField property="pet" optionsContainer="petsDc"/>
+                <pickerField id="clinicField" property="clinic"/>
             </column>
         </form>
 

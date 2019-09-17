@@ -5,6 +5,13 @@ buildscript {
         maven {
             url 'https://dl.bintray.com/cuba-platform/main'
         }
+        maven {
+            url 'https://repo.cuba-platform.com/content/groups/premium'
+            credentials {
+                username System.getenv('CUBA_PREMIUM_USER')
+                password System.getenv('CUBA_PREMIUM_PASSWORD')
+            }
+        }
         jcenter()
     }
     dependencies {
@@ -39,6 +46,7 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+    appComponent('com.haulmont.addon.maps:maps-global:1.0.0')
 
 }
 

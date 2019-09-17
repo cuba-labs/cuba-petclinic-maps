@@ -1,52 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:maps="http://schemas.haulmont.com/maps/0.1/ui-component.xsd"
         caption="msg://browseCaption"
         focusComponent="ownersTable"
         messagesPack="com.haulmont.sample.petclinic.web.owner.owner">
     <data readOnly="true">
         <collection id="ownersDc"
                     class="com.haulmont.sample.petclinic.entity.owner.Owner"
-                    view="owner-with-pets">
+                    view="owner-with-district">
+            view="owner-with-district">
             <loader id="ownersDl">
                 <query>
                     <![CDATA[select e from petclinic_Owner e]]>
                 </query>
             </loader>
         </collection>
+        <collection id="districtsDc" class="com.haulmont.sample.petclinic.entity.district.District">
+            <loader>
+                <query><![CDATA[select e from petclinic_District e ]]></query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="ownersTable"
-            spacing="true">
-        <filter id="filter"
-                applyTo="ownersTable"
-                dataLoader="ownersDl">
-            <properties include=".*"/>
-        </filter>
-        <groupTable id="ownersTable"
-                    dataContainer="ownersDc"
-                    width="100%">
-            <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
-            </actions>
-            <columns>
-                <column id="firstName"/>
-                <column id="lastName"/>
-                <column id="address"/>
-                <column id="city"/>
-                <column id="telephone"/>
-                <column id="email"/>
-            </columns>
-            <rowsCount/>
-            <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
-                <button id="createBtn" action="ownersTable.create"/>
-                <button id="editBtn" action="ownersTable.edit"/>
-                <button id="removeBtn" action="ownersTable.remove"/>
-            </buttonsPanel>
-        </groupTable>
+    <layout spacing="true">
+        <hbox spacing="true" height="100%" width="100%">
+            <vbox spacing="true" expand="ownersTable" height="100%">
+                <filter id="filter"
+                        applyTo="ownersTable"
+                        dataLoader="ownersDl">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="ownersTable"
+                            dataContainer="ownersDc"
+                            width="100%">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="firstName"/>
+                        <column id="lastName"/>
+                        <column id="address"/>
+                        <column id="city"/>
+                        <column id="telephone"/>
+                        <column id="email"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn" action="ownersTable.create"/>
+                        <button id="editBtn" action="ownersTable.edit"/>
+                        <button id="removeBtn" action="ownersTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+            </vbox>
+            <vbox spacing="true" height="100%" expand="map">
+                <lookupField id="districtField" caption="msg://districtField" optionsContainer="districtsDc"/>
+                <maps:geoMap id="map" width="100%" center="-3.7044, 40.4158" zoom="12">
+                    <maps:layers selectedLayer="owners">
+                        <maps:tile id="tiles" tileProvider="maps_OpenStreetMap"/>
+                        <maps:vector id="owners" dataContainer="ownersDc">
+                            <maps:cluster/>
+                        </maps:vector>
+                    </maps:layers>
+                </maps:geoMap>
+            </vbox>
+        </hbox>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

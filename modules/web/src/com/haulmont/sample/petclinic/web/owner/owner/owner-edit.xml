@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:maps="http://schemas.haulmont.com/maps/0.1/ui-component.xsd"
         caption="msg://editorCaption"
         focusComponent="fieldGroup"
         messagesPack="com.haulmont.sample.petclinic.web.pet.pet">
     <data>
         <instance id="ownerDc"
                   class="com.haulmont.sample.petclinic.entity.owner.Owner"
-                  view="_base">
+                  view="owner-with-district">
             <loader/>
+            <instance id="ownerDistrictDc" property="district"/>
         </instance>
 
     </data>
 
     <dialogMode height="600"
                 width="800"/>
-
     <layout expand="editActions" spacing="true">
-        <form id="fieldGroup" dataContainer="ownerDc">
-            <column width="250px">
-                <textField property="firstName"/>
-                <textField property="lastName"/>
-                <textField property="address"/>
-                <textField property="city"/>
-                <textField property="telephone"/>
-                <textField property="email"/>
-            </column>
-        </form>
-
-
+        <hbox spacing="true">
+            <form id="fieldGroup" dataContainer="ownerDc">
+                <column width="250px">
+                    <textField property="firstName"/>
+                    <textField property="lastName"/>
+                    <textField property="address"/>
+                    <textField property="city"/>
+                    <textField property="telephone"/>
+                    <textField property="email"/>
+                    <pickerField id="districtField" property="district"/>
+                </column>
+            </form>
+            <maps:geoMap id="map" height="400" width="800" center="-3.7044, 40.4158" zoom="10">
+                <maps:layers selectedLayer="ownerLayer">
+                    <maps:tile id="tiles" tileProvider="maps_OpenStreetMap"/>
+                    <maps:vector id="districtLayer" dataContainer="ownerDistrictDc"/>
+                    <maps:vector id="ownerLayer" dataContainer="ownerDc" editable="true"/>
+                </maps:layers>
+            </maps:geoMap>
+        </hbox>
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>

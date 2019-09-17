@@ -1,14 +1,19 @@
 package com.haulmont.sample.petclinic.entity.owner;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import com.haulmont.addon.maps.gis.Geometry;
+import com.haulmont.addon.maps.gis.converters.wkt.CubaPointWKTConverter;
+import com.haulmont.chile.core.annotations.MetaProperty;
+import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.sample.petclinic.entity.Person;
+import com.haulmont.sample.petclinic.entity.district.District;
+import com.haulmont.sample.petclinic.entity.pet.Pet;
+import org.locationtech.jts.geom.Point;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import com.haulmont.sample.petclinic.entity.Person;
-import com.haulmont.sample.petclinic.entity.pet.Pet;
 import java.util.List;
-import javax.persistence.OneToMany;
 
 @Table(name = "PETCLINIC_OWNER")
 @Entity(name = "petclinic_Owner")
@@ -32,6 +37,33 @@ public class Owner extends Person {
 
     @OneToMany(mappedBy = "owner")
     protected List<Pet> pets;
+
+    @MetaProperty(datatype = "GeoPoint")
+    @Column(name = "LOCATION")
+    @Geometry
+    @Convert(converter = CubaPointWKTConverter.class)
+    protected Point location;
+
+    @OnDeleteInverse(DeletePolicy.UNLINK)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DISTRICT_ID")
+    protected District district;
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public Point getLocation() {
+        return location;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
+    }
 
     public void setEmail(String email) {
         this.email = email;

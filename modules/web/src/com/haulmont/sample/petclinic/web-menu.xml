@@ -7,6 +7,9 @@
         <item screen="petclinic_Vet.browse"/>
         <separator/>
         <item screen="petclinic_Visit.browse"/>
+        <item screen="petclinic_Clinic.browse"/>
+        <item screen="petclinic_District.browse"/>
+        <item screen="petclinic_VisitsHeatmap"/>
     </menu>
     <menu id="application-masterdata" insertBefore="administration">
         <item screen="petclinic_PetType.browse"/>

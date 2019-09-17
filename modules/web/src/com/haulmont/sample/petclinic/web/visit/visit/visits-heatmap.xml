@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:maps="http://schemas.haulmont.com/maps/0.1/ui-component.xsd"
+        caption="msg://caption"
+        messagesPack="com.haulmont.sample.petclinic.web.visit.visit">
+    <data>
+        <collection id="clinicsDc" class="com.haulmont.sample.petclinic.entity.clinic.Clinic">
+            <loader>
+                <query><![CDATA[select e from petclinic_Clinic e ]]></query>
+            </loader>
+        </collection>
+        <collection id="visitsDc" class="com.haulmont.sample.petclinic.entity.visit.Visit"
+                    view="visits-with-pet-and-owner">
+            <loader>
+                <query><![CDATA[select e from petclinic_Visit e ]]></query>
+            </loader>
+        </collection>
+    </data>
+    <layout>
+        <maps:geoMap id="map" height="100%" width="100%" center="-3.7044, 40.4158" zoom="12">
+            <maps:layers>
+                <maps:tile id="tiles" tileProvider="maps_OpenStreetMap"/>
+                <maps:vector id="clinics" dataContainer="clinicsDc"/>
+            </maps:layers>
+        </maps:geoMap>
+    </layout>
+</window>

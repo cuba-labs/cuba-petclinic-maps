@@ -1,3 +1,95 @@
+-- begin PETCLINIC_DISTRICT
+create table PETCLINIC_DISTRICT (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAME varchar(255),
+    POLYGON VARCHAR(4000),
+    --
+    primary key (ID)
+)^
+-- end PETCLINIC_DISTRICT
+-- begin PETCLINIC_CLINIC
+create table PETCLINIC_CLINIC (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAME varchar(255),
+    LOCATION VARCHAR(100),
+    --
+    primary key (ID)
+)^
+-- end PETCLINIC_CLINIC
+-- begin PETCLINIC_VISIT
+create table PETCLINIC_VISIT (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    VISIT_DATE date not null,
+    DESCRIPTION varchar(4000),
+    PET_ID varchar(36) not null,
+    CLINIC_ID varchar(36),
+    --
+    primary key (ID)
+)^
+-- end PETCLINIC_VISIT
+-- begin PETCLINIC_VET
+create table PETCLINIC_VET (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    FIRST_NAME varchar(255) not null,
+    LAST_NAME varchar(255),
+    --
+    primary key (ID)
+)^
+-- end PETCLINIC_VET
+-- begin PETCLINIC_OWNER
+create table PETCLINIC_OWNER (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    FIRST_NAME varchar(255) not null,
+    LAST_NAME varchar(255),
+    --
+    ADDRESS varchar(255) not null,
+    CITY varchar(255) not null,
+    EMAIL varchar(255),
+    TELEPHONE varchar(255),
+    LOCATION VARCHAR(100),
+    DISTRICT_ID varchar(36),
+    --
+    primary key (ID)
+)^
+-- end PETCLINIC_OWNER
 -- begin PETCLINIC_PET
 create table PETCLINIC_PET (
     ID varchar(36) not null,
@@ -33,43 +125,6 @@ create table PETCLINIC_PET_TYPE (
     primary key (ID)
 )^
 -- end PETCLINIC_PET_TYPE
--- begin PETCLINIC_OWNER
-create table PETCLINIC_OWNER (
-    ID varchar(36) not null,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    FIRST_NAME varchar(255) not null,
-    LAST_NAME varchar(255),
-    --
-    ADDRESS varchar(255) not null,
-    CITY varchar(255) not null,
-    EMAIL varchar(255),
-    TELEPHONE varchar(255),
-    --
-    primary key (ID)
-)^
--- end PETCLINIC_OWNER
--- begin PETCLINIC_VET
-create table PETCLINIC_VET (
-    ID varchar(36) not null,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    FIRST_NAME varchar(255) not null,
-    LAST_NAME varchar(255),
-    --
-    primary key (ID)
-)^
--- end PETCLINIC_VET
 -- begin PETCLINIC_SPECIALTY
 create table PETCLINIC_SPECIALTY (
     ID varchar(36) not null,
@@ -85,24 +140,6 @@ create table PETCLINIC_SPECIALTY (
     primary key (ID)
 )^
 -- end PETCLINIC_SPECIALTY
--- begin PETCLINIC_VISIT
-create table PETCLINIC_VISIT (
-    ID varchar(36) not null,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
-    --
-    VISIT_DATE date not null,
-    DESCRIPTION varchar(4000),
-    PET_ID varchar(36) not null,
-    --
-    primary key (ID)
-)^
--- end PETCLINIC_VISIT
 -- begin PETCLINIC_VET_SPECIALTY_LINK
 create table PETCLINIC_VET_SPECIALTY_LINK (
     VET_ID varchar(36) not null,

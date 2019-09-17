@@ -26,4 +26,21 @@
         <property name="owner"
                   view="_local"/>
     </view>
+    <view entity="petclinic_Visit" name="visit-with-pet-and-clinic" extends="visit-with-pet">
+        <property name="clinic" view="_minimal">
+            <property name="location"/>
+        </property>
+    </view>
+    <view entity="petclinic_Owner" name="owner-with-district" extends="_local">
+        <property name="district" view="_minimal">
+            <property name="polygon"/>
+        </property>
+    </view>
+    <view entity="petclinic_Visit" name="visits-with-pet-and-owner" extends="visit-with-pet">
+        <property name="pet" view="_minimal">
+            <property name="owner" view="_minimal">
+                <property name="location"/>
+            </property>
+        </property>
+    </view>
 </views>
