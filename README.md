@@ -4,7 +4,7 @@
   <img src="https://github.com/cuba-platform/cuba-petclinic/blob/master/modules/web/themes/hover/branding/petclinic_logo_full.png"/>
 </p>
 
-This is a variation of [CUBA Petclinic](https://github.com/cuba-platform/cuba-petclinic) application working with the [CUBA Maps add-on](https://www.cuba-platform.com/marketplace/maps/).
+This is a variation of [CUBA Petclinic](https://github.com/cuba-platform/cuba-petclinic) application working with the [CUBA Maps add-on](https://www.cuba-platform.com/marketplace/maps/). [Video Tutorial](https://www.youtube.com/watch?v=mJsmpIXzcbU) demonstrates creating and running this demo project.
 
 ## Domain model
 
